@@ -1,0 +1,9 @@
+com\aimaitenki\app\WeatherAdvisor$AdviceResult.class
+com\aimaitenki\web\AdviceController.class
+com\aimaitenki\app\ForecastRepository.class
+com\aimaitenki\web\WebServer.class
+com\aimaitenki\web\WebApplication.class
+com\aimaitenki\app\UserPreferences.class
+com\aimaitenki\app\Main.class
+com\aimaitenki\app\WeatherAdvisor.class
+com\aimaitenki\app\WeatherCondition.class
