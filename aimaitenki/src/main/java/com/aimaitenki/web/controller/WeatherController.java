@@ -1,13 +1,12 @@
 package com.aimaitenki.web.controller;
 
 import com.aimaitenki.web.service.WeatherService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/weather")
+@RequestMapping("/api")
 public class WeatherController {
 
     private final WeatherService weatherService;
@@ -16,25 +15,17 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @GetMapping(value = "/{city}", produces = "text/html; charset=UTF-8")
-    public String getWeather(@PathVariable String city) {
-        String result = weatherService.getWeather(city);
-        return "<html>" +
-                "<head>" +
-                "<meta charset='UTF-8'>" +
-                "<title>天気アドバイザー</title>" +
-                "<style>" +
-                "body { font-family:'Segoe UI','Hiragino Sans',sans-serif; " +
-                "background:linear-gradient(to bottom right,#a3d8f4,#e6f2ff);" +
-                "text-align:center; padding:3em; }" +
-                ".card { background:white; border-radius:12px; " +
-                "box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:2em;" +
-                "display:inline-block; max-width:400px; }" +
-                ".emoji { font-size:3em; }" +
-                "</style>" +
-                "</head><body>" +
-                "<div class='card'><div class='emoji'>🌦️</div>" +
-                "<pre style='text-align:left;white-space:pre-wrap;'>" + result + "</pre>" +
-                "</div></body></html>";
+    /** 文字メッセージが欲しい場合（既存のUI想定に合わせる） */
+    @GetMapping("/advice")
+    public String advice(@RequestParam(required = false) String home,
+            @RequestParam(required = false) String destination) {
+        return weatherService.buildAdvice(home, destination);
+    }
+
+    /** boolean が欲しい場合のAPI（機械可読） */
+    @GetMapping("/will-rain")
+    public Map<String, Object> willRain(@RequestParam String q) {
+        boolean will = weatherService.getWeather(q); // boolean
+        return Map.of("location", q, "willRainToday", will);
     }
 }

@@ -1,0 +1,14 @@
+<!-- src/main/resources/templates/error.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>エラー</title>
+</head>
+<body>
+    <h2>エラーが発生しました</h2>
+    <p>予期しないエラーが発生しました。</p>
+    <p>詳細: <span th:text="${error}"></span></p>
+    <a href="/login">ログインページに戻る</a>
+</body>
+</html>

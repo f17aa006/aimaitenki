@@ -1,0 +1,71 @@
+<!-- src/main/resources/templates/login.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン | 天気アドバイザー</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom right, #e6f2ff, #a3d8f4);
+            text-align: center;
+            padding: 3em;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 2em;
+            display: inline-block;
+            max-width: 400px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 80%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        button {
+            width: 85%;
+            padding: 0.7em;
+            margin-top: 1em;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .link-btn {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.6em 1.5em;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .link-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>🔑 ログイン</h2>
+        <form th:action="@{/login}" method="post">
+        <input type="text" name="username" placeholder="ユーザー名" autofocus>
+        <input type="password" name="password" placeholder="パスワード">
+        <!-- CSRF（Thymeleafで必須） -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button type="submit">ログイン</button>
+        </form>
+        <a th:href="@{/signup}">サインアップ</a>
+    </div>
+</body>
+</html>
